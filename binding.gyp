@@ -59,20 +59,13 @@
                 }
             } ],
             [ "OS == 'mac', {
-                "xcode_settings": {
-                    "OTHER_CPLUSPLUSFLAGS": [
-                      "-std=c++11",
-                      "-stdlib=libc++",
-                      "-fexceptions"
-                    ],
-                    "OTHER_LDFLAGS": [
-                      "-Wl,-rpath,@loader_path/../../ndi/lib/mac_universal"
-                    ]
-                },
+                "copies": [ {
+                    "destination":  "build/Release",
+                    "files":        [ "<(ndi_dir)/lib/mac_universal/libndi.dylib" ]
+                } ],
                 "link_settings": {
-                    "libraries": [
-                      "<((ndi_dir)/lib/mac_universal/libndi.dylib"
-                    ],
+                    "libraries":    [ "-Wl,-rpath,@loader_path", "-lndi" ],
+                    "library_dirs": [ "<(ndi_dir)/lib/mac_universal" ]
                 }
             } ]
         ]
