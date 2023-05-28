@@ -58,7 +58,7 @@
                     "library_dirs": [ "<(ndi_dir)/lib/lnx-x64" ]
                 }
             } ],
-            [ "OS == 'mac', {
+            [ "OS == 'mac'", {
                 "copies": [ {
                     "destination":  "build/Release",
                     "files":        [ "<(ndi_dir)/lib/mac_universal/libndi.dylib" ]
