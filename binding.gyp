@@ -58,14 +58,21 @@
                     "library_dirs": [ "<(ndi_dir)/lib/lnx-x64" ]
                 }
             } ],
-            [ "OS == 'mac' and target_arch == 'x64'", {
-                "copies": [ {
-                    "destination":  "build/Release",
-                    "files":        [ "<(ndi_dir)/lib/mac-x64/libndi.dylib" ]
-                } ],
+            [ "OS == 'mac', {
+                "xcode_settings": {
+                    "OTHER_CPLUSPLUSFLAGS": [
+                      "-std=c++11",
+                      "-stdlib=libc++",
+                      "-fexceptions"
+                    ],
+                    "OTHER_LDFLAGS": [
+                      "-Wl,-rpath,@loader_path/../../lib/mac_universal"
+                    ]
+                },
                 "link_settings": {
-                    "libraries":    [ "-Wl,-rpath,@loader_path", "-lndi" ],
-                    "library_dirs": [ "<(ndi_dir)/lib/mac-x64" ]
+                    "libraries": [
+                      "<(module_root_dir)/lib/mac_universal/libndi.dylib"
+                    ],
                 }
             } ]
         ]
