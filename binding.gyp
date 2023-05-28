@@ -66,12 +66,12 @@
                       "-fexceptions"
                     ],
                     "OTHER_LDFLAGS": [
-                      "-Wl,-rpath,@loader_path/../../lib/mac_universal"
+                      "-Wl,-rpath,@loader_path/../../ndi/lib/mac_universal"
                     ]
                 },
                 "link_settings": {
                     "libraries": [
-                      "<(module_root_dir)/lib/mac_universal/libndi.dylib"
+                      "<((ndi_dir)/lib/mac_universal/libndi.dylib"
                     ],
                 }
             } ]
