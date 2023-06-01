@@ -15,10 +15,21 @@
 
 const path = require("path")
 
-const addon = require('bindings')({
-  bindings: "grandiose",
-  module_root: path.resolve(__dirname)
-});
+const addon = isSupportedPlaform()
+  ? require('bindings')({
+    bindings: "grandiose",
+    module_root: path.resolve(__dirname)
+  })
+  : {
+    version () { return null },
+    isSupportedCPU () { return false },
+    initialize () { return null },
+    destroy () { return null },
+    send () { return null },
+    receive () { return null },
+    routing () { return null },
+    find: { apply () { return null } }
+  }
 
 const COLOR_FORMAT_BGRX_BGRA = 0; // No alpha channel: BGRX, Alpha channel: BGRA
 const COLOR_FORMAT_UYVY_BGRA = 1; // No alpha channel: UYVY, Alpha channel: BGRA
@@ -78,6 +89,11 @@ let find = function (...args) {
     args[0].extraIPs = args[0].extraIPs.reduce((x, y) => x + ',' + y);
   }
   return addon.find.apply(null, args);
+}
+
+function isSupportedPlatform () {
+  return process.platform === 'darwin' ||
+    (['win32', 'linux'].includes(process.platform) && ['ia32', 'x64'].includes(process.arch))
 }
 
 module.exports = {
