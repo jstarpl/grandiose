@@ -23,7 +23,7 @@
         "shx":              "0.3.4"
     },
     "scripts": {
-        "install":          "node ndi.js && node-gyp rebuild",
+        "install":          "node ndi.js",
         "build":            "node-gyp rebuild",
         "test":             "node scratch/scratchVersion.js",
         "clean":            "shx rm -rf ndi build"
