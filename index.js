@@ -15,7 +15,7 @@
 
 const path = require("path")
 
-const addon = isSupportedPlaform()
+const addon = isSupportedPlatform()
   ? require('bindings')({
     bindings: "grandiose",
     module_root: path.resolve(__dirname)
