@@ -24,9 +24,13 @@ const zip       = require("cross-zip")
 const got       = require("got")
 const mkdirp    = require("mkdirp")
 const tmp       = require("tmp")
+const spawn     = require("cross-spawn")
 
 /*  establish asynchronous environment  */
 ;(async () => {
+  /* Check if supported platform and continue only if it is */
+  if (os.platform() === "darwin" ||
+      (["win32", "linux"].includes(os.platform()) && ["ia32", "x64"].includes(os.arch()))) {
     console.log("++ ad-hoc assembling NDK SDK distribution subset from original sources")
     if (os.platform() === "win32") {
         /*  download innoextract utility  */
@@ -136,6 +140,13 @@ const tmp       = require("tmp")
         shell.rm("-f", file1)
         shell.rm("-rf", dir1)
     }
+    // Spawn build script
+    console.log("Preparing to build")
+    spawn.sync("npm", ["run", "build"], {
+        input: "Native module build required.",
+        stdio: "inherit"
+    })
+  }
 })().catch((err) => {
     console.log(`** ERROR: ${err}`)
 })
