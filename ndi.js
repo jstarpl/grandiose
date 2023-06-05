@@ -132,9 +132,13 @@ const spawn     = require("cross-spawn")
         shell.mkdir("-p", "ndi/include")
         shell.mkdir("-p", "ndi/lib/lnx-x86")
         shell.mkdir("-p", "ndi/lib/lnx-x64")
+        shell.mkdir("-p", "ndi/lib/lnx-armv7l")
+        shell.mkdir("-p", "ndi/lib/lnx-arm64")
         shell.mv(path.join(dir1, "NDI SDK for Linux/include/*.h"), "ndi/include/")
         shell.mv(path.join(dir1, "NDI SDK for Linux/lib/i686-linux-gnu/*"),   "ndi/lib/lnx-x86/")
         shell.mv(path.join(dir1, "NDI SDK for Linux/lib/x86_64-linux-gnu/*"), "ndi/lib/lnx-x64/")
+        shell.mv(path.join(dir1, "NDI SDK for Linux/lib/arm-rpi4-linux-gnueabihf/*"), "ndi/lib/lnx-armv7l/")
+        shell.mv(path.join(dir1, "NDI SDK for Linux/lib/aarch64-rpi4-linux-gnueabi/*"), "ndi/lib/lnx-arm64/")
 
         /*  remove temporary files  */
         console.log("-- removing temporary files")
