@@ -92,8 +92,8 @@ let find = function (...args) {
 }
 
 function isSupportedPlatform () {
-  return process.platform === 'darwin' ||
-    (['win32', 'linux'].includes(process.platform) && ['ia32', 'x64'].includes(process.arch))
+  return process.platform === 'darwin' || process.platform === 'linux' ||
+    (process.platform === 'win32' && ['ia32', 'x64'].includes(process.arch))
 }
 
 module.exports = {
