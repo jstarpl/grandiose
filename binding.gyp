@@ -61,7 +61,8 @@
             [ "OS == 'mac'", {
                 "copies": [ {
                     "destination":  "build/Release",
-                    "files":        [ "<(ndi_dir)/lib/mac_universal/libndi.dylib" ]
+                    "files":        [ "<(ndi_dir)/lib/mac_universal/libndi.dylib",
+                                      "<(ndi_dir)/lib/mac_universal/libndi_licenses.txt" ]
                 } ],
                 "link_settings": {
                     "libraries":    [ "-Wl,-rpath,@loader_path", "-lndi" ],
