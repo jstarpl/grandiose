@@ -29,8 +29,8 @@ const spawn     = require("cross-spawn")
 /*  establish asynchronous environment  */
 ;(async () => {
   /* Check if supported platform and continue only if it is */
-  if (os.platform() === "darwin" ||
-      (["win32", "linux"].includes(os.platform()) && ["ia32", "x64"].includes(os.arch()))) {
+  if (os.platform() === "darwin" || os.platform() === "linux" ||
+      (os.platform() === "win32" && ["ia32", "x64"].includes(os.arch()))) {
     console.log("++ ad-hoc assembling NDK SDK distribution subset from original sources")
     if (os.platform() === "win32") {
         /*  download innoextract utility  */
