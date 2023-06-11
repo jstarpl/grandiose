@@ -26,6 +26,7 @@
     "scripts": {
         "install":          "node ndi.js",
         "build":            "node-gyp rebuild",
+        "build:arm":        "CXX=arm-linux-gnueabihf-g++ node-gyp rebuild --arch\"arm\" --target_arch=\"arm\"",
         "test":             "node scratch/scratchVersion.js",
         "clean":            "shx rm -rf ndi build"
     }
