@@ -137,3 +137,7 @@ export function routing(params: {
   groups?: string | string[]
 }): Routing
 
+export function isSupportedCPU(): boolean
+export function initialize(): boolean
+export function destroy(): boolean
+export function version(): string
