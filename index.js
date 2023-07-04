@@ -48,59 +48,59 @@ const FOURCC_RGBX = NDI_LIB_FOURCC("R", "G", "B", "X")
 const FOURCC_FLTp = NDI_LIB_FOURCC("F", "L", "T", "p")
 
 class FourCC {
-  UYVY = FOURCC_UYVY;
-  UYVA = FOURCC_UYVA;
-  P216 = FOURCC_P216;
-  PA16 = FOURCC_PA16;
-  YV12 = FOURCC_YV12;
-  I420 = FOURCC_I420;
-  NV12 = FOURCC_NV12;
-  BGRA = FOURCC_BGRA;
-  BGRX = FOURCC_BGRX;
-  RGBA = FOURCC_RGBA;
-  RGBX = FOURCC_RGBX;
-  FLTp = FOURCC_FLTp;
+  static UYVY = FOURCC_UYVY;
+  static UYVA = FOURCC_UYVA;
+  static P216 = FOURCC_P216;
+  static PA16 = FOURCC_PA16;
+  static YV12 = FOURCC_YV12;
+  static I420 = FOURCC_I420;
+  static NV12 = FOURCC_NV12;
+  static BGRA = FOURCC_BGRA;
+  static BGRX = FOURCC_BGRX;
+  static RGBA = FOURCC_RGBA;
+  static RGBX = FOURCC_RGBX;
+  static FLTp = FOURCC_FLTp;
 }
 
 class ColorFormat {
-  BGRX_BGRA = 0; // No alpha channel: BGRX, Alpha channel: BGRA
-  UYVY_BGRA = 1; // No alpha channel: UYVY, Alpha channel: BGRA
-  RGBX_RGBA = 2; // No alpha channel: RGBX, Alpha channel: RGBA
-  UYVY_RGBA = 3; // No alpha channel: UYVY, Alpha channel: RGBA
-  Fastest = 100;
-  Best = 101;
+  static BGRX_BGRA = 0; // No alpha channel: BGRX, Alpha channel: BGRA
+  static UYVY_BGRA = 1; // No alpha channel: UYVY, Alpha channel: BGRA
+  static RGBX_RGBA = 2; // No alpha channel: RGBX, Alpha channel: RGBA
+  static UYVY_RGBA = 3; // No alpha channel: UYVY, Alpha channel: RGBA
+  static Fastest = 100;
+  static Best = 101;
 
   // On Windows there are some APIs that require bottom to top images in RGBA format. Specifying
   // this format will return images in this format. The image data pointer will still point to the
   // "top" of the image, althought he stride will be negative. You can get the "bottom" line of the image
   // using : video_data.p_data + (video_data.yres - 1)*video_data.line_stride_in_bytes
-  BGRX_BGRA_FLIPPED = 200;
+  static BGRX_BGRA_FLIPPED = 200;
 }
 
 class Bandwidth {
-  MetadataOnly = -10; // Receive metadata.
-  AudioOnly = 10; // Receive metadata, audio.
-  Lowest = 0; // Receive metadata, audio, video at a lower bandwidth and resolution.
-  Highest = 100; // Receive metadata, audio, video at full resolution.
+  static MetadataOnly = -10; // Receive metadata.
+  static AudioOnly = 10; // Receive metadata, audio.
+  static Lowest = 0; // Receive metadata, audio, video at a lower bandwidth and resolution.
+  static Highest = 100; // Receive metadata, audio, video at full resolution.
 }
 
 class FrameType {
-  Progressive = 1;
-  Interlaced = 0;
-  Field0 = 2;
-  Field1 = 3;
+  static Progressive = 1;
+  static Interlaced = 0;
+  static Field0 = 2;
+  static Field1 = 3;
 }
 
 class AudioFormat {
   // Default NDI audio format
   // Channels stored one after the other in each block - 32-bit floating point values
-  Float32Separate = 0;
+  static Float32Separate = 0;
   // Alternative NDI audio foramt
   // Channels stored as channel-interleaved 32-bit floating point values
-  Float32Interleaved = 1;
+  static Float32Interleaved = 1;
   // Alternative NDI audio format
   // Channels stored as channel-interleaved 16-bit integer values
-  Int16Interleaved = 2;
+  static Int16Interleaved = 2;
 }
 
 let find = function (...args) {
@@ -132,4 +132,5 @@ module.exports = {
   FrameType,
   FourCC,
   Bandwidth,
+  AudioFormat,
 };
