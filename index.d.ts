@@ -19,9 +19,9 @@ export interface VideoFrame {
   frameRateD: number
   fourCC: FourCC
   pictureAspectRatio: number
-  timestamp: bigint // PTP timestamp
+  timestamp?: bigint // PTP timestamp
   frameFormatType: FrameType
-  timecode: bigint // Measured in nanoseconds
+  timecode?: bigint // Measured in nanoseconds
   lineStrideBytes: number
   data: Buffer
 }
