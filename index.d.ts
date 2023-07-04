@@ -1,6 +1,6 @@
 export interface AudioFrame {
   type: 'audio'
-  audioFormat: AudioFormat
+  audioFormat: number
   referenceLevel: number
   sampleRate: number // Hz
   channels: number
@@ -17,10 +17,10 @@ export interface VideoFrame {
   yres: number
   frameRateN: number
   frameRateD: number
-  fourCC: FourCC
+  fourCC: number
   pictureAspectRatio: number
   timestamp: bigint // PTP timestamp
-  frameFormatType: FrameType
+  frameFormatType: number
   timecode: bigint // Measured in nanoseconds
   lineStrideBytes: number
   data: Buffer
@@ -30,14 +30,14 @@ export interface Receiver {
   embedded: unknown
   video: (timeout?: number) => Promise<VideoFrame>
   audio: (params: {
-    audioFormat: AudioFormat
+    audioFormat: number
     referenceLevel: number
   }, timeout?: number) => Promise<AudioFrame>
   metadata: any
   data: any
   source: Source
-  colorFormat: ColorFormat
-  bandwidth: Bandwidth
+  colorFormat: number
+  bandwidth: number
   allowVideoFields: boolean
 }
 
@@ -121,8 +121,8 @@ export function find(params: {
 
 export function receive(params: {
   source: Source
-  colorFormat?: ColorFormat
-  bandwidth?: Bandwidth
+  colorFormat?: number
+  bandwidth?: number
   allowVideoFields?: boolean
   name?: string
 }): Receiver
