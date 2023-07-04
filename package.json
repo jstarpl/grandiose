@@ -25,8 +25,8 @@
     },
     "scripts": {
         "install":          "node ndi.js",
-        "build":            "node-gyp rebuild",
-        "build:arm":        "CXX=arm-linux-gnueabihf-g++ node-gyp rebuild --arch\"arm\" --target_arch=\"arm\"",
+        "build":            "node-gyp rebuild && rm build/node_gyp_bins/python3",
+        "build:arm":        "CXX=arm-linux-gnueabihf-g++ node-gyp rebuild --arch\"arm\" --target_arch=\"arm\" && rm build/node_gyp_bins/python3",
         "test":             "node scratch/scratchVersion.js",
         "clean":            "shx rm -rf ndi build"
     }
