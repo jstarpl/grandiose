@@ -31,11 +31,6 @@ const addon = isSupportedPlatform()
     find: { apply () { return null } }
   }
 
-const COLOR_FORMAT_BGRX_BGRA = 0; // No alpha channel: BGRX, Alpha channel: BGRA
-const COLOR_FORMAT_UYVY_BGRA = 1; // No alpha channel: UYVY, Alpha channel: BGRA
-const COLOR_FORMAT_RGBX_RGBA = 2; // No alpha channel: RGBX, Alpha channel: RGBA
-const COLOR_FORMAT_UYVY_RGBA = 3; // No alpha channel: UYVY, Alpha channel: RGBA
-
 const NDI_LIB_FOURCC = (ch0, ch1, ch2, ch3) =>
 	(ch0.charCodeAt(0) | (ch1.charCodeAt(0) << 8) | (ch2.charCodeAt(0) << 16) | (ch3.charCodeAt(0) << 24))
 
@@ -52,33 +47,61 @@ const FOURCC_RGBA = NDI_LIB_FOURCC("R", "G", "B", "A")
 const FOURCC_RGBX = NDI_LIB_FOURCC("R", "G", "B", "X")
 const FOURCC_FLTp = NDI_LIB_FOURCC("F", "L", "T", "p")
 
-// On Windows there are some APIs that require bottom to top images in RGBA format. Specifying
-// this format will return images in this format. The image data pointer will still point to the
-// "top" of the image, althought he stride will be negative. You can get the "bottom" line of the image
-// using : video_data.p_data + (video_data.yres - 1)*video_data.line_stride_in_bytes
-const COLOR_FORMAT_BGRX_BGRA_FLIPPED = 200;
+class FourCC {
+  UYVY = FOURCC_UYVY;
+  UYVA = FOURCC_UYVA;
+  P216 = FOURCC_P216;
+  PA16 = FOURCC_PA16;
+  YV12 = FOURCC_YV12;
+  I420 = FOURCC_I420;
+  NV12 = FOURCC_NV12;
+  BGRA = FOURCC_BGRA;
+  BGRX = FOURCC_BGRX;
+  RGBA = FOURCC_RGBA;
+  RGBX = FOURCC_RGBX;
+  FLTp = FOURCC_FLTp;
+}
 
-const COLOR_FORMAT_FASTEST = 100;
+class ColorFormat {
+  BGRX_BGRA = 0; // No alpha channel: BGRX, Alpha channel: BGRA
+  UYVY_BGRA = 1; // No alpha channel: UYVY, Alpha channel: BGRA
+  RGBX_RGBA = 2; // No alpha channel: RGBX, Alpha channel: RGBA
+  UYVY_RGBA = 3; // No alpha channel: UYVY, Alpha channel: RGBA
+  Fastest = 100;
+  Best = 101;
 
-const BANDWIDTH_METADATA_ONLY = -10; // Receive metadata.
-const BANDWIDTH_AUDIO_ONLY    =  10; // Receive metadata, audio.
-const BANDWIDTH_LOWEST        =  0; // Receive metadata, audio, video at a lower bandwidth and resolution.
-const BANDWIDTH_HIGHEST       =  100; // Receive metadata, audio, video at full resolution.
+  // On Windows there are some APIs that require bottom to top images in RGBA format. Specifying
+  // this format will return images in this format. The image data pointer will still point to the
+  // "top" of the image, althought he stride will be negative. You can get the "bottom" line of the image
+  // using : video_data.p_data + (video_data.yres - 1)*video_data.line_stride_in_bytes
+  BGRX_BGRA_FLIPPED = 200;
+}
 
-const FORMAT_TYPE_PROGRESSIVE = 1;
-const FORMAT_TYPE_INTERLACED = 0;
-const FORMAT_TYPE_FIELD_0 = 2;
-const FORMAT_TYPE_FIELD_1 = 3;
+class Bandwidth {
+  MetadataOnly = -10; // Receive metadata.
+  AudioOnly = 10; // Receive metadata, audio.
+  Lowest = 0; // Receive metadata, audio, video at a lower bandwidth and resolution.
+  Highest = 100; // Receive metadata, audio, video at full resolution.
+}
 
-// Default NDI audio format
-// Channels stored one after the other in each block - 32-bit floating point values
-const AUDIO_FORMAT_FLOAT_32_SEPARATE = 0;
-// Alternative NDI audio foramt
-// Channels stored as channel-interleaved 32-bit floating point values
-const AUDIO_FORMAT_FLOAT_32_INTERLEAVED = 1;
-// Alternative NDI audio format
-// Channels stored as channel-interleaved 16-bit integer values
-const AUDIO_FORMAT_INT_16_INTERLEAVED = 2;
+class FrameType {
+  Progressive = 1;
+  Interlaced = 0;
+  Field0 = 2;
+  Field1 = 3;
+}
+
+class AudioFormat {
+  // Default NDI audio format
+  // Channels stored one after the other in each block - 32-bit floating point values
+  Float32Separate = 0;
+  // Alternative NDI audio foramt
+  // Channels stored as channel-interleaved 32-bit floating point values
+  Float32Interleaved = 1;
+  // Alternative NDI audio format
+  // Channels stored as channel-interleaved 16-bit integer values
+  Int16Interleaved = 2;
+}
 
 let find = function (...args) {
   if (args.length === 0) return addon.find();
@@ -105,16 +128,8 @@ module.exports = {
   receive: addon.receive,
   send: addon.send,
   routing: addon.routing,
-  COLOR_FORMAT_BGRX_BGRA, COLOR_FORMAT_UYVY_BGRA,
-  COLOR_FORMAT_RGBX_RGBA, COLOR_FORMAT_UYVY_RGBA,
-  COLOR_FORMAT_BGRX_BGRA_FLIPPED, COLOR_FORMAT_FASTEST,
-  FOURCC_UYVY, FOURCC_UYVA, FOURCC_P216, FOURCC_PA16, FOURCC_YV12,
-  FOURCC_I420, FOURCC_NV12, FOURCC_BGRA, FOURCC_BGRX, FOURCC_RGBA, FOURCC_RGBX,
-  FOURCC_FLTp,
-  BANDWIDTH_METADATA_ONLY, BANDWIDTH_AUDIO_ONLY,
-  BANDWIDTH_LOWEST, BANDWIDTH_HIGHEST,
-  FORMAT_TYPE_PROGRESSIVE, FORMAT_TYPE_INTERLACED,
-  FORMAT_TYPE_FIELD_0, FORMAT_TYPE_FIELD_1,
-  AUDIO_FORMAT_FLOAT_32_SEPARATE, AUDIO_FORMAT_FLOAT_32_INTERLEAVED,
-  AUDIO_FORMAT_INT_16_INTERLEAVED
+  ColorFormat,
+  FrameType,
+  FourCC,
+  Bandwidth,
 };

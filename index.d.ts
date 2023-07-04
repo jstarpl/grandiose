@@ -19,9 +19,9 @@ export interface VideoFrame {
   frameRateD: number
   fourCC: FourCC
   pictureAspectRatio: number
-  timestamp: [ number, number ] // PTP timestamp
+  timestamp: bigint // PTP timestamp
   frameFormatType: FrameType
-  timecode: [ number, number ] // Measured in nanoseconds
+  timecode: bigint // Measured in nanoseconds
   lineStrideBytes: number
   data: Buffer
 }
@@ -68,47 +68,49 @@ export interface Source {
   urlAddress?: string
 }
 
-export const enum FrameType {
-  Progressive = 1,
-  Interlaced = 0,
-  Field0 = 2,
-  Field1 = 3,
+export interface FrameType {
+  Progressive: 1,
+  Interlaced: 0,
+  Field0: 2,
+  Field1: 3,
 }
 
-export const enum ColorFormat {
-  BGRX_BGRA = 0,
-  UYVY_BGRA = 1,
-  RGBX_RGBA = 2,
-  UYVY_RGBA = 3,
-  Fastest = 100,
-  Best = 101
+export interface ColorFormat {
+  BGRX_BGRA: 0,
+  UYVY_BGRA: 1,
+  RGBX_RGBA: 2,
+  UYVY_RGBA: 3,
+  Fastest: 100,
+  Best: 101,
+  BGRX_BGRA_FLIPPED: 200,
 }
 
-export const enum FourCC {
-  UYVY = 1498831189,
-  UYVA = 1096178005,
-  P216 = 909193808,
-  PA16 = 909197648,
-  YV12 = 842094169,
-  I420 = 808596553,
-  NV12 = 842094158,
-  BGRA = 1095911234,
-  BGRX = 1481787202,
-  RGBA = 1094862674,
-  RGBX = 1480738642
+export interface FourCC {
+  UYVY: number,
+  UYVA: number,
+  P216: number,
+  PA16: number,
+  YV12: number,
+  I420: number,
+  NV12: number,
+  BGRA: number,
+  BGRX: number,
+  RGBA: number,
+  RGBX: number,
+  FLTp: number,
 }
 
-export const enum AudioFormat {
-  Float32Separate = 0,
-  Float32Interleaved = 1,
-  Int16Interleaved = 2
+export interface AudioFormat {
+  Float32Separate: 0,
+  Float32Interleaved: 1,
+  Int16Interleaved: 2
 }
 
-export const enum Bandwidth {
-  MetadataOnly = -10,
-  AudioOnly = 10,
-  Lowest = 0,
-  Highest = 100
+export interface Bandwidth {
+  MetadataOnly: -10,
+  AudioOnly: 10,
+  Lowest: 0,
+  Highest: 100
 }
 
 export function find(params: {
