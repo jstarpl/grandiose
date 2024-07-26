@@ -46,6 +46,7 @@ export interface Sender {
   destroy: () => Promise<void>
   video: (frame: VideoFrame) => Promise<void>
   audio: (frame: AudioFrame) => Promise<void>
+  connections: () => number
   name: string
   groups?: string | string[]
   clockVideo: boolean
