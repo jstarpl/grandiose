@@ -1,33 +1,43 @@
 {
-    "name":        "grandiose",
-    "version":     "0.0.4",
+    "name": "@jstarpl/grandiose",
+    "version": "0.0.5",
     "description": "Node.JS native bindings to the Newtek NDI SDK.",
-    "homepage":    "https://github.com/Streampunk/grandiose#readme",
-    "keywords":    [ "Newtek", "NDI", "network", "device", "interface" ],
-    "author":      "Streampunk Media et al",
-    "license":     "Apache-2.0",
-    "main":        "index.js",
-    "gypfile":     true,
-    "repository":  { "type": "git", "url": "git+https://github.com/Streampunk/grandiose.git" },
-    "bugs":        { "url": "https://github.com/Streampunk/grandiose/issues" },
+    "homepage": "https://github.com/Streampunk/grandiose#readme",
+    "keywords": [
+        "Newtek",
+        "NDI",
+        "network",
+        "device",
+        "interface"
+    ],
+    "author": "Streampunk Media et al",
+    "license": "Apache-2.0",
+    "main": "index.js",
+    "gypfile": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Streampunk/grandiose.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Streampunk/grandiose/issues"
+    },
     "dependencies": {
-        "bindings":         "1.5.0",
-        "got":              "^11.8.3",
-        "mkdirp":           "1.0.4",
-        "tmp":              "0.2.1",
-        "execa":            "5.1.1",
-        "cross-zip":        "4.0.0",
-        "shelljs":          "0.8.5",
-        "cross-spawn":      "7.0.3"
+        "bindings": "1.5.0",
+        "mkdirp": "^3.0.1",
+        "tmp": "^0.2.3",
+        "execa": "^9.5.2",
+        "cross-zip": "^4.0.1",
+        "shelljs": "0.9.2",
+        "cross-spawn": "7.0.6"
     },
     "devDependencies": {
-        "shx":              "0.3.4"
+        "shx": "0.4.0"
     },
     "scripts": {
-        "install":          "node ndi.js",
-        "build":            "node-gyp rebuild && rm build/node_gyp_bins/python3",
-        "build:arm":        "CXX=arm-linux-gnueabihf-g++ node-gyp rebuild --arch\"arm\" --target_arch=\"arm\" && rm build/node_gyp_bins/python3",
-        "test":             "node scratch/scratchVersion.js",
-        "clean":            "shx rm -rf ndi build"
+        "get:ndi": "node scripts/ndi.mjs",
+        "build": "node-gyp rebuild && rm build/node_gyp_bins/python3",
+        "build:arm": "CXX=arm-linux-gnueabihf-g++ node-gyp rebuild --arch\"arm\" --target_arch=\"arm\" && rm build/node_gyp_bins/python3",
+        "test": "node scratch/scratchVersion.js",
+        "clean": "shx rm -rf ndi build"
     }
 }
